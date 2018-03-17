@@ -15,10 +15,12 @@ if [[ "$SECRET_KEY" == "" ]];then
 fi
 
 mkdir -p /ssl/${DOMAIN}/
+touch /var/log/acme.sh.log
 $acme   --issue   --dns dns_dp -d ${DOMAIN}
 $acme  --installcert  -d ${DOMAIN}    \
         --key-file   /ssl/${DOMAIN}/privkey.pem \
         --fullchain-file /ssl/${DOMAIN}/fullchain.pem \
-        --reloadcmd  "python update_cdn_sslcert.py" --log  "/var/log/acme.sh.log"
+        --reloadcmd  "python /app/update_cdn_sslcert.py" --debug --log  "/var/log/acme.sh.log"
+
 
 tail -f /var/log/acme.sh.log

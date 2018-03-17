@@ -2,6 +2,7 @@
 借助于let's encrypt 以及qiniu sdn实现七牛cdn证书的自动更新
 
 ## 环境变量:
+- DOMAIN: 你七牛cdn的域名
 - ACCESS_KEY: 七牛api ACCESS_KEY
 - SECRET_KEY: 七牛api SECRET_KEY
 
@@ -24,14 +25,34 @@ git clone https://github.com/daozzg/qiniu-cdn-ssl-autoupdate.git
 cd qiniu-cdn-ssl-autoupdate
 docker build -t qiniu-cdn-ssl-autoupdate .
 #dnspod
-docker run -d -v ACCESS_KEY=xxx -v SECRET_KEY=xxx -v DP_Id=xxx -v DP_Key=xxx qiniu-cdn-ssl-autoupdate
+docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx qiniu-cdn-ssl-autoupdate
 #aliyun
-docker run -d -v ACCESS_KEY=xxx -v SECRET_KEY=xxx -v Ali_Key=xxx -v Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
+docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
 ```
 
-## 
-docker
-
+### 使用构建好的镜像
+```
+#dnspod
+docker run -it -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
+#aliyun
+docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
+```
+或者通过 docker-compose运行 
+创建docker-compose.yml  
+```
+qiniu-cdn-ssl-autoupdate:
+  image: daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate:master-ff7db17
+  environment:
+    - ACCESS_KEY=changeme
+    - SECRET_KEY=changeme
+    - DOMAIN=www.daozzg.com
+    - DP_Id=changeme
+    - DP_Key=changeme
+```
+执行  
+```
+docker-compose up -d
+```
 
 ## 代码许可
 
