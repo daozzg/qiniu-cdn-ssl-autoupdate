@@ -10,4 +10,4 @@ RUN git clone https://github.com/Neilpang/acme.sh.git && cd ./acme.sh && ./acme.
 RUN git clone https://github.com/daozzg/qiniu-python-sdk.git qiniu-python-sdk && cd qiniu-python-sdk && python setup.py install && cd ..
 
 ADD . /app
-CMD ["sh","startup.sh"]
+CMD ["bash","startup.sh"]
