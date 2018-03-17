@@ -5,10 +5,12 @@
 import qiniu
 from qiniu import DomainManager
 import os
+import time
+
 # 账户ak，sk
-access_key = os.getenv('ACCESS_KEY','')
-secret_key = os.getenv('SECRET_KEY','')
-domain_name=os.getenv('DOMAIN','')
+access_key = os.getenv('ACCESS_KEY', '')
+secret_key = os.getenv('SECRET_KEY', '')
+domain_name = os.getenv('DOMAIN', '')
 
 auth = qiniu.Auth(access_key=access_key, secret_key=secret_key)
 domain_manager = DomainManager(auth)
@@ -16,15 +18,15 @@ domain_manager = DomainManager(auth)
 privatekey = "/ssl/{}/privkey.pem".format(domain_name)
 ca = "/ssl/{}/fullchain.pem".format(domain_name)
 
+with open(privatekey, 'r') as f:
+    privatekey_str = f.read()
 
-with open(privatekey,'r') as f:
-    privatekey_str=f.read()
+with open(ca, 'r') as f:
+    ca_str = f.read()
 
-with open(ca,'r') as f:
-    ca_str=f.read()
-
-ret, info = domain_manager.create_sslcert(domain_name, domain_name, privatekey_str, ca_str)
+ret, info = domain_manager.create_sslcert("{}/{}".format(domain_name, time.strftime("%Y-%m-%d", time.localtime())),
+                                          domain_name, privatekey_str, ca_str)
 print(ret['certID'])
 
-ret, info = domain_manager.put_httpsconf(domain_name, ret['certID'],False)
+ret, info = domain_manager.put_httpsconf(domain_name, ret['certID'], False)
 print(info)
