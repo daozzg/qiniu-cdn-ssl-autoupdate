@@ -1,0 +1,7 @@
+qiniu-cdn-ssl-autoupdate:
+  build: .
+  environment:
+    - ACCESS_KEY=changeme
+    - SECRET_KEY=changeme
+    - DP_Id=changeme
+    - DP_Key=changeme
