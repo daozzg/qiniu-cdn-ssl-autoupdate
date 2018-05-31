@@ -13,6 +13,7 @@ if [[ "$SECRET_KEY" == "" ]];then
     echo "please set env: SECRET_KEY"
     exit 1
 fi
+service cron start
 
 mkdir -p /ssl/${DOMAIN}/
 touch /var/log/acme.sh.log
