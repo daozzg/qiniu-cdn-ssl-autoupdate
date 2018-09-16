@@ -19,7 +19,7 @@ mkdir -p /ssl/${DOMAIN}/
 touch /var/log/acme.sh.log
 if [[ "${DP_Id}" != "" ]];then
 $acme   --issue   --dns dns_dp -d ${DOMAIN}
-elif [[ "${DP_Id}" != "" ]];then
+elif [[ "${Ali_Key}" != "" ]];then
 $acme   --issue   --dns dns_ali -d ${DOMAIN}
 else
 $acme   --issue   --dns ${DNS_API} -d ${DOMAIN}
