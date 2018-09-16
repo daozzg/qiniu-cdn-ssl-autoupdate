@@ -41,7 +41,7 @@ docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Al
 创建docker-compose.yml  
 ```
 qiniu-cdn-ssl-autoupdate:
-  image: daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate:master-ff7db17
+  image: daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
   environment:
     - ACCESS_KEY=changeme
     - SECRET_KEY=changeme
