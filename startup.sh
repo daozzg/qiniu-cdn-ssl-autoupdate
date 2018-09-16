@@ -17,7 +17,13 @@ service cron start
 
 mkdir -p /ssl/${DOMAIN}/
 touch /var/log/acme.sh.log
+if [[ "${DP_Id}" != "" ]];then
 $acme   --issue   --dns dns_dp -d ${DOMAIN}
+elif [[ "${DP_Id}" != "" ]];then
+$acme   --issue   --dns dns_ali -d ${DOMAIN}
+else
+$acme   --issue   --dns ${DNS_API} -d ${DOMAIN}
+fi
 $acme  --installcert  -d ${DOMAIN}    \
         --key-file   /ssl/${DOMAIN}/privkey.pem \
         --fullchain-file /ssl/${DOMAIN}/fullchain.pem \
