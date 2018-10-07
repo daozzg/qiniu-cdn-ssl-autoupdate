@@ -28,5 +28,7 @@ ret, info = domain_manager.create_sslcert("{}/{}".format(domain_name, time.strft
                                           domain_name, privatekey_str, ca_str)
 print(ret['certID'])
 
+if domain_name.startswith("*"):
+    domain_name = domain_name[1:]
 ret, info = domain_manager.put_httpsconf(domain_name, ret['certID'], False)
 print(info)
