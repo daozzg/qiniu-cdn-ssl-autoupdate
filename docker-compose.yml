@@ -1,6 +1,6 @@
 qiniu-cdn-ssl-autoupdate:
-  build: .
-  #image: daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
+  #build: .
+  image: yahuiwong/qiniu-cdn-ssl-autoupdate
   environment:
     - ACCESS_KEY=changeme
     - SECRET_KEY=changeme
