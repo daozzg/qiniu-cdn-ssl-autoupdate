@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 acme="/root/.acme.sh/acme.sh"
 
-if [[ "$DOMAIN" == "" ]] ;then
-    echo "please set env: DOMAIN"
+if [[ "$SSLDOMAIN" == "" ]] ;then
+    echo "please set env: SSLDOMAIN"
     exit 1
 fi
 if [[ "$ACCESS_KEY" == "" ]] ;then
@@ -15,12 +15,12 @@ if [[ "$SECRET_KEY" == "" ]];then
 fi
 service cron start
 
-mkdir -p /ssl/${DOMAIN}/
+mkdir -p /ssl/${SSLDOMAIN}/
 touch /var/log/acme.sh.log
-$acme   --issue   --dns dns_dp -d ${DOMAIN}
-$acme  --installcert  -d ${DOMAIN}    \
-        --key-file   /ssl/${DOMAIN}/privkey.pem \
-        --fullchain-file /ssl/${DOMAIN}/fullchain.pem \
+$acme   --issue   --dns dns_dp -d ${SSLDOMAIN} -d *.${SSLDOMAIN}
+$acme  --installcert  -d *.${SSLDOMAIN}    \
+        --key-file   /ssl/${SSLDOMAIN}/privkey.pem \
+        --fullchain-file /ssl/${SSLDOMAIN}/fullchain.pem \
         --reloadcmd  "python /app/update_cdn_sslcert.py" --debug --log  "/var/log/acme.sh.log"
 
 
