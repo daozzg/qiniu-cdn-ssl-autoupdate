@@ -2,7 +2,9 @@
 借助于let's encrypt 以及qiniu sdn实现七牛cdn证书的自动更新
 
 ## 环境变量:
-- DOMAIN: 你七牛cdn的域名
+
+- CDNDOMAINS:你七牛cdn的域名 多个请用应为逗号(`,`)隔开
+- SSLDOMAIN: 你申请ssl的主域名，程序会申请一个通用的泛域名
 - ACCESS_KEY: 七牛api ACCESS_KEY
 - SECRET_KEY: 七牛api SECRET_KEY
 
@@ -21,31 +23,32 @@
 ##运行
 ### 自己构建
 ```
-git clone https://github.com/daozzg/qiniu-cdn-ssl-autoupdate.git
+git clone https://github.com/YahuiWong/qiniu-cdn-ssl-autoupdate.git
 cd qiniu-cdn-ssl-autoupdate
 docker build -t qiniu-cdn-ssl-autoupdate .
 #dnspod
-docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx qiniu-cdn-ssl-autoupdate
+docker run -d -e SSLDOMAIN=yahui.wang  -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx qiniu-cdn-ssl-autoupdate
 #aliyun
-docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
+docker run -d -e SSLDOMAIN=yahui.wang  -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
 ```
 
 ### 使用构建好的镜像
 ```
 #dnspod
-docker run -it -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
+docker run -it -e SSLDOMAIN=yahui.wang -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx yahuiwong/qiniu-cdn-ssl-autoupdate
 #aliyun
-docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
+docker run -d -e SSLDOMAIN=yahui.wang -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx yahuiwong/qiniu-cdn-ssl-autoupdate
 ```
 或者通过 docker-compose运行 
 创建docker-compose.yml  
 ```
 qiniu-cdn-ssl-autoupdate:
-  image: daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate:master-ff7db17
+  image: yahuiwong/qiniu-cdn-ssl-autoupdate
   environment:
     - ACCESS_KEY=changeme
     - SECRET_KEY=changeme
-    - DOMAIN=www.daozzg.com
+    - SSLDOMAIN=yahui.wang
+    - CDNDOMAINS=yahui.wang,blog.yahui.wang
     - DP_Id=changeme
     - DP_Key=changeme
 ```
