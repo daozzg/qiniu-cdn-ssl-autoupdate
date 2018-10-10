@@ -18,7 +18,7 @@ service cron start
 mkdir -p /ssl/${SSLDOMAIN}/
 touch /var/log/acme.sh.log
 $acme   --issue   --dns dns_dp -d ${SSLDOMAIN} -d *.${SSLDOMAIN}
-$acme  --installcert  -d *.${SSLDOMAIN}    \
+$acme  --installcert  -d ${SSLDOMAIN}    \
         --key-file   /ssl/${SSLDOMAIN}/privkey.pem \
         --fullchain-file /ssl/${SSLDOMAIN}/fullchain.pem \
         --reloadcmd  "python /app/update_cdn_sslcert.py" --debug --log  "/var/log/acme.sh.log"
