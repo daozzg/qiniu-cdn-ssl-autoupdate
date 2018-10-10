@@ -34,6 +34,5 @@ print(cdn_domain_names_arrs)
 for cdn_domain in cdn_domain_names_arrs:
     print(cdn_domain)
     r, i = domain_manager.put_httpsconf(cdn_domain, ret['certID'], False)
-    print(r)
     print(i)
     pass
