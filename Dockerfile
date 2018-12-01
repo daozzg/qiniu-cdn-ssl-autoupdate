@@ -2,7 +2,7 @@ FROM python:2.7
 WORKDIR /app
 
 #install acme.sh
-RUN apk add  --update  cron socat vim
+RUN apt-get -y update && apt-get install -y cron socat vim
 RUN git clone https://github.com/Neilpang/acme.sh.git && cd ./acme.sh && ./acme.sh --install && cd ..
 
 #install qiniu sdk
