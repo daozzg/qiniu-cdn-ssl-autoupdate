@@ -1,4 +1,4 @@
-FROM python:2.7-alpine3.8
+FROM python:2.7
 WORKDIR /app
 
 #install acme.sh
