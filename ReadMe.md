@@ -31,7 +31,8 @@ docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP
 docker run -d -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
 ```
 
-### 使用构建好的镜像
+### 使用构建好的[镜像](https://hub.daocloud.io/repos/c4b55b3e-74de-4c00-87e6-9a82b8484999)
+
 ```
 #dnspod
 docker run -it -e DOMAIN=www.daozzg.com -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx daocloud.io/daozzg/qiniu-cdn-ssl-autoupdate
