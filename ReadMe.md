@@ -18,7 +18,8 @@
 - Ali_Key: 
 - Ali_Secret: 
 
-##运行
+## 运行
+
 ### 自己构建
 ```
 git clone https://github.com/daozzg/qiniu-cdn-ssl-autoupdate.git
@@ -53,6 +54,10 @@ qiniu-cdn-ssl-autoupdate:
 ```
 docker-compose up -d
 ```
+
+### 泛域名wildcard
+
+指定`DOMAIN=*.wildcard.example.com`即可
 
 ## 代码许可
 
