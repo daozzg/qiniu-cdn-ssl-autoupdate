@@ -20,7 +20,8 @@
 - Ali_Key: 
 - Ali_Secret: 
 
-##运行
+## 运行
+
 ### 自己构建
 ```
 git clone https://github.com/YahuiWong/qiniu-cdn-ssl-autoupdate.git
@@ -32,7 +33,8 @@ docker run -d -e SSLDOMAIN=yahui.wang  -e CDNDOMAINS=blog.yahui.wang -e ACCESS_K
 docker run -d -e SSLDOMAIN=yahui.wang  -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e Ali_Key=xxx -e Ali_Secret=xxx qiniu-cdn-ssl-autoupdate
 ```
 
-### 使用构建好的镜像
+### 使用构建好的[镜像](https://hub.daocloud.io/repos/c4b55b3e-74de-4c00-87e6-9a82b8484999)
+
 ```
 #dnspod
 docker run -it -e SSLDOMAIN=yahui.wang -e CDNDOMAINS=blog.yahui.wang -e ACCESS_KEY=xxx -e SECRET_KEY=xxx -e DP_Id=xxx -e DP_Key=xxx yahuiwong/qiniu-cdn-ssl-autoupdate
@@ -56,6 +58,10 @@ qiniu-cdn-ssl-autoupdate:
 ```
 docker-compose up -d
 ```
+
+### 泛域名wildcard
+
+指定`DOMAIN=*.wildcard.example.com`即可
 
 ## 代码许可
 
